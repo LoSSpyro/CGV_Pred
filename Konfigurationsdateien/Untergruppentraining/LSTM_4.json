@@ -1,0 +1,35 @@
+{
+	"training": {
+		"batch_size": 20,
+		"n_features": 3
+	},
+	"model": {
+		"loss": "rmse",
+		"optimizer": "adam",
+		"metrics": [
+		],
+		"sample_weight_mode": "temporal",
+		"layers": [
+			{
+				"type": "lstm",
+				"neurons": 50,
+				"return_sequences": false,
+				"timesteps": 60
+			},
+			{
+				"type": "dense",
+				"neurons": 1,
+				"dropout": 0.5
+			}
+		]
+	},
+	"predicting": {
+		"batch_size": 20,
+		"n_features": 3
+	},
+	"evaluating": {
+		"batch_size": 20,
+		"n_features": 3
+	}
+	
+}

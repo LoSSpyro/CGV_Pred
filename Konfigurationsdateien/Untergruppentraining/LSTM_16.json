@@ -1,0 +1,43 @@
+{
+	"training": {
+		"batch_size": 20,
+		"n_features": 3
+	},
+	"model": {
+		"loss": "rmse",
+		"optimizer": "adam",
+		"metrics": [
+		],
+		"sample_weight_mode": "temporal",
+		"layers": [
+			{
+				"type": "lstm",
+				"neurons": 100,
+				"return_sequences": false,
+				"timesteps": 60
+			},
+			{
+				"type": "dense",
+				"neurons": 64
+			},
+			{
+				"type": "dense",
+				"neurons": 32
+			},
+			{
+				"type": "dense",
+				"neurons": 1,
+				"dropout": 0.2
+			}
+		]
+	},
+	"predicting": {
+		"batch_size": 20,
+		"n_features": 3
+	},
+	"evaluating": {
+		"batch_size": 20,
+		"n_features": 3
+	}
+	
+}

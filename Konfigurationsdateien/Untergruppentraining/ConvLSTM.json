@@ -1,0 +1,93 @@
+{
+	"training": {
+		"batch_size": 2,
+		"n_features": 3,
+		"frames": 20
+	},
+	"model": {
+		"loss": "rmse",
+		"optimizer": "adam",
+		"metrics": [
+		],
+		"sample_weight_mode": "temporal",
+		"layers": [
+			{
+				"type": "ConvLSTM2D",
+				"filters": 20,
+				"kernel_size": 3,
+				"timesteps": 60,
+				"data_format": "channels_first",
+				"padding": "same",
+				"return_sequences": true
+			},
+			{
+				"type": "BatchNormalization"
+			},
+			{
+				"type": "MaxPooling3D",
+				"pool_size": 2,
+				"padding": "same",
+				"data_format": "channels_first"
+			},
+			{
+				"type": "ConvLSTM2D",
+				"filters": 10,
+				"kernel_size": 3,
+				"data_format": "channels_first",
+				"padding": "same",
+				"return_sequences": true
+			},
+			{
+				"type": "BatchNormalization"
+			},
+			{
+				"type": "MaxPooling3D",
+				"pool_size": 3,
+				"padding": "same",
+				"data_format": "channels_first"
+			},
+			{
+				"type": "ConvLSTM2D",
+				"filters": 5,
+				"kernel_size": 3,
+				"stateful": false,
+				"kernel_initializer": "random_uniform",
+				"data_format": "channels_first",
+				"padding": "same",
+				"return_sequences": true
+			},
+			{
+				"type": "MaxPooling3D",
+				"pool_size": 2,
+				"padding": "same",
+				"data_format": "channels_first"
+			},
+			{
+				"type": "TimeDistributed_flatten"
+			},
+			{
+				"type": "TimeDistributed_dense",
+				"output_dimension": 256
+			},
+			{
+				"type": "TimeDistributed_dense",
+				"output_dimension": 32
+			},
+			{
+				"type": "TimeDistributed_dense",
+				"output_dimension": 1
+			}
+		]
+	},
+	"predicting": {
+		"batch_size": 2,
+		"n_features": 3,
+		"frames": 20
+	},
+	"evaluating": {
+		"batch_size": 2,
+		"n_features": 3,
+		"frames": 20
+	}
+	
+}
